@@ -28,6 +28,7 @@ public class AdminController {
 	
 	@Autowired
 	private AdminRepository Adrepo;
+	
 	@Autowired
 	private DoctorRepository Dcrepo;
 	
@@ -117,6 +118,25 @@ public class AdminController {
         return a;
     }
 	
+	//pharma login check
+	//http://localhost:7075/pdms/admincontroller/pharmalogin
+	@PostMapping("/pharmalogin")
+    public Boolean pharmalogin(@Validated @RequestBody Pharmacist pharmacist) 
+    {
+        Boolean a=false;;
+        String name=pharmacist.getName();
+        String password=pharmacist.getPassword();
+        Pharmacist b = Phrepo.findByName(name);   
+        if(b==null) {
+        	return a;
+        }
+        if(name.equals(b.getName()) && password.equals(b.getPassword()))
+                {
+            a=true;
+           
+                }
+        return a;
+    }
 //	//Get - 
 //	//http://localhost:7075/hospital/pharmacontroller/getpharma
 //	@GetMapping("/getpharma")

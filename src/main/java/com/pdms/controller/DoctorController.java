@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pdms.model.Doctor;
 import com.pdms.repository.DoctorRepository;
-import com.pdms.exception.ResourceNotFoundException;
+import com.pdms.exception.ResourceNotFoundException; 
  
   
 @RestController
@@ -23,7 +24,7 @@ public class DoctorController {
 	
     @Autowired
 	private DoctorRepository Dcrepo;
-	
+    
 
 	//all doctors 
 	//http://localhost:7075/pdms/doctorcontroller/getalldoctor
@@ -31,6 +32,15 @@ public class DoctorController {
 	public List<Doctor> getAllDoctor() {
 		return Dcrepo.findAll();  
 	} 
+	
+	//find by doctor username
+	//http://localhost:7075/pdms/doctorcontroller/getdoctorbyusername
+    @GetMapping("/getdoctorbyusername/{doctorobject}")
+    public Doctor getbyusernamedoctor(@PathVariable(value="doctorobject") String doctorobject)
+    {
+    	return   Dcrepo.findByUsername(doctorobject); 
+    }
+	
 	
 	//doctor check 
 	//http://localhost:7075/pdms/doctorcontroller/doctorlogin
@@ -44,7 +54,7 @@ public class DoctorController {
         if(b==null) {
         	return a;
         }
-        if(name.equals(b.getName()) && password.equals(b.getPassword()))
+        if(name.equals(b.getUsername()) && password.equals(b.getPassword()))
                 {
             a=true;
            

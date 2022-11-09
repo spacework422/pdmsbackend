@@ -8,4 +8,6 @@ import com.pdms.model.Pharmacist;
 @Repository
 public interface PharmacistRepository extends JpaRepository<Pharmacist, Integer> {
 
+	public Pharmacist findByName(String name);
+
 }

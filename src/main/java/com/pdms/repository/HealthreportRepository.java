@@ -11,7 +11,7 @@ import com.pdms.model.Healthreport;
 @Repository
 public interface HealthreportRepository extends JpaRepository<Healthreport, Integer>{
 	
-//	public Doctor findByName(String name);
+//	public Healthreport findByUsername(String username);
 //	public List<Doctor> findByStream(String stream);
 //	public List<Doctor> findByHospital(String Hospital);
 
